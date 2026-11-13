@@ -1,0 +1,673 @@
+{
+  "seed": 37,
+  "as_of": "2026-08-15",
+  "remaining_target": 60,
+  "observations": [
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 8,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 7,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 0,
+      "open_days": 0,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-05",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-06",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-07",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s0",
+      "protocol_id": "p1",
+      "month": "2026-08",
+      "enrolled": 7,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 7,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p2",
+      "month": "2026-05",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p2",
+      "month": "2026-06",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p2",
+      "month": "2026-07",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s1",
+      "protocol_id": "p2",
+      "month": "2026-08",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-05",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-06",
+      "enrolled": 7,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-07",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s2",
+      "protocol_id": "p1",
+      "month": "2026-08",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 8,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p2",
+      "month": "2026-05",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p2",
+      "month": "2026-06",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p2",
+      "month": "2026-07",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s3",
+      "protocol_id": "p2",
+      "month": "2026-08",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-05",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-06",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-07",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s4",
+      "protocol_id": "p1",
+      "month": "2026-08",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 8,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p2",
+      "month": "2026-05",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p2",
+      "month": "2026-06",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p2",
+      "month": "2026-07",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s5",
+      "protocol_id": "p2",
+      "month": "2026-08",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-05",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-06",
+      "enrolled": 7,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-07",
+      "enrolled": 2,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s6",
+      "protocol_id": "p1",
+      "month": "2026-08",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p1",
+      "month": "2026-01",
+      "enrolled": 0,
+      "open_days": 0,
+      "complete": true,
+      "known_at": "2026-01-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p1",
+      "month": "2026-02",
+      "enrolled": 0,
+      "open_days": 0,
+      "complete": true,
+      "known_at": "2026-02-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p1",
+      "month": "2026-03",
+      "enrolled": 0,
+      "open_days": 0,
+      "complete": true,
+      "known_at": "2026-03-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p1",
+      "month": "2026-04",
+      "enrolled": 0,
+      "open_days": 0,
+      "complete": true,
+      "known_at": "2026-04-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p2",
+      "month": "2026-05",
+      "enrolled": 6,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-05-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p2",
+      "month": "2026-06",
+      "enrolled": 4,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-06-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p2",
+      "month": "2026-07",
+      "enrolled": 3,
+      "open_days": 25,
+      "complete": true,
+      "known_at": "2026-07-28",
+      "revision": 1
+    },
+    {
+      "site_id": "s7",
+      "protocol_id": "p2",
+      "month": "2026-08",
+      "enrolled": 5,
+      "open_days": 25,
+      "complete": false,
+      "known_at": "2026-08-28",
+      "revision": 1
+    }
+  ],
+  "protocols": [
+    {
+      "protocol_id": "p1",
+      "parent": null,
+      "change_type": "root",
+      "known_at": "2026-01-01"
+    },
+    {
+      "protocol_id": "p2",
+      "parent": "p1",
+      "change_type": "eligibility-change",
+      "known_at": "2026-05-01"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "current",
+      "delay_site": null,
+      "delay_months": 0
+    },
+    {
+      "scenario_id": "delayed",
+      "delay_site": "s7",
+      "delay_months": 2
+    }
+  ]
+}
