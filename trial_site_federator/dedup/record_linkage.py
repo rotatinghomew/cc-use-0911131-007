@@ -1,5 +1,6 @@
 from __future__ import annotations
-from trial_site_federator.runtime import GenericRuleProcessor, ProcessingContext
+from typing import Any, Mapping, Sequence
+from trial_site_federator.runtime import DomainError, GenericRuleProcessor, ProcessingContext, normalize_text
 
 STAGE = 'record_linkage'
 RULES = [
@@ -368,3 +369,73 @@ class RecordLinkageProcessor(GenericRuleProcessor):
 
 def build_processor() -> GenericRuleProcessor:
     return RecordLinkageProcessor()
+
+
+# --- Observation linkage ------------------------------------------------------------
+#
+# Monthly site counts arrive from multiple feeds.  Two feeds can describe the same
+# site-month; a later revision supersedes an earlier one.  The catalog rule is:
+# the highest revision wins, ties are broken by the later ``known_at``, and a tie
+# that still disagrees is a conflict rather than a silent pick.  Feasibility
+# consumes this so a corrected month is not double counted.
+
+def observation_key(record: Mapping[str, Any]) -> tuple[str, str]:
+    site_id = normalize_text(record.get('site_id'), 'site_id', 96)
+    month = normalize_text(record.get('month'), 'month', 20)
+    if not site_id:
+        raise DomainError('site_id is required')
+    if not month:
+        raise DomainError('month is required')
+    return site_id, month
+
+
+def _revision_rank(record: Mapping[str, Any]) -> tuple:
+    revision = record.get('revision')
+    try:
+        revision_value = float(revision) if revision is not None else 0.0
+    except (TypeError, ValueError):
+        revision_value = 0.0
+    return (revision_value, normalize_text(record.get('known_at'), 'known_at', 40))
+
+
+def link_observations(records: Sequence[Mapping[str, Any]]) -> dict:
+    """Deduplicate site-month observations, newest revision per key.
+
+    Returns ``rows`` (key -> winning record) plus ``conflicts`` and
+    ``superseded`` so the analysis can explain what it discarded.  The winning
+    record is copied, never mutated.
+    """
+    rows: dict[tuple[str, str], dict] = {}
+    superseded: list[dict] = []
+    conflicts: list[dict] = []
+    for record in records:
+        if not isinstance(record, Mapping):
+            raise DomainError('observations must be objects')
+        key = observation_key(record)
+        candidate = dict(record)
+        current = rows.get(key)
+        if current is None:
+            rows[key] = candidate
+            continue
+        current_rank = _revision_rank(current)
+        candidate_rank = _revision_rank(candidate)
+        if candidate_rank > current_rank:
+            rows[key] = candidate
+            superseded.append({'site_id': key[0], 'month': key[1], 'revision': current.get('revision')})
+        elif candidate_rank == current_rank:
+            comparable = ('enrolled', 'open_days', 'complete', 'protocol_id')
+            if any(candidate.get(name) != current.get(name) for name in comparable):
+                conflicts.append({'site_id': key[0], 'month': key[1],
+                                  'revision': candidate.get('revision')})
+            else:
+                superseded.append({'site_id': key[0], 'month': key[1],
+                                   'revision': current.get('revision')})
+        else:
+            superseded.append({'site_id': key[0], 'month': key[1], 'revision': candidate.get('revision')})
+    return {'rows': rows, 'superseded': superseded, 'conflicts': conflicts}
+
+
+def known_by(record: Mapping[str, Any], as_of: str) -> bool:
+    """True when the record was reported on or before ``as_of``."""
+    known_at = normalize_text(record.get('known_at'), 'known_at', 40)
+    return bool(known_at) and known_at <= as_of

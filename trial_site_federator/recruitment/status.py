@@ -1,5 +1,6 @@
 from __future__ import annotations
-from trial_site_federator.runtime import GenericRuleProcessor, ProcessingContext
+from typing import Any, Mapping, Sequence
+from trial_site_federator.runtime import DomainError, GenericRuleProcessor, ProcessingContext, normalize_text
 
 STAGE = 'recruitment_status'
 RULES = [
@@ -368,3 +369,93 @@ class StatusProcessor(GenericRuleProcessor):
 
 def build_processor() -> GenericRuleProcessor:
     return StatusProcessor()
+
+
+# --- Exposure and pause semantics -----------------------------------------------------
+#
+# Recruitment effort is measured in open site-days, not calendar months.  A month
+# with a pause or a late opening contributes a partial exposure, and a month with
+# zero open days contributes no exposure at all.  This keeps a "screening halted"
+# month from being read as "site cannot recruit" while still preventing a paused
+# month from being advertised as capacity in a scenario plan.
+
+def _number(value: object, name: str) -> float:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        raise DomainError(f'{name} must be numeric') from None
+    if number < 0:
+        raise DomainError(f'{name} must be non-negative')
+    return number
+
+
+def exposure_days(record: Mapping[str, Any], month_length: int | None = None) -> dict:
+    """Interpret a monthly count as open-day exposure.
+
+    ``open_days`` above the month length is impossible and rejected; a month
+    reported without ``open_days`` is unknown exposure, not zero exposure.
+    """
+    raw = record.get('open_days')
+    if raw is None:
+        return {'status': 'unknown', 'days': None, 'paused': False, 'reason': 'missing-open-days'}
+    days = _number(raw, 'open_days')
+    if month_length is not None and days > month_length:
+        raise DomainError(f'open_days={days} exceeds month length {month_length}')
+    paused = days == 0
+    return {
+        'status': 'paused' if paused else 'open',
+        'days': days,
+        'paused': paused,
+        'reason': 'zero-exposure-pause' if paused else 'exposed',
+    }
+
+
+def enrolment(record: Mapping[str, Any]) -> float:
+    value = _number(record.get('enrolled', 0), 'enrolled')
+    if value != int(value):
+        raise DomainError('enrolled must be a whole count')
+    return value
+
+
+def exposure_share(record: Mapping[str, Any], month_length: int) -> float:
+    """Open fraction of the month in [0, 1]; unknown exposure raises."""
+    report = exposure_days(record, month_length)
+    if report['days'] is None:
+        raise DomainError('open_days is required to compute exposure')
+    return report['days'] / float(month_length)
+
+
+def exposure_weight(record: Mapping[str, Any], month_length: int) -> float:
+    """Exposure in full-month equivalents, the natural offset for a rate model."""
+    return exposure_share(record, month_length)
+
+
+def pause_months(records: Sequence[Mapping[str, Any]]) -> list[dict]:
+    result = []
+    for record in records:
+        report = exposure_days(record)
+        if report['paused']:
+            result.append({'site_id': normalize_text(record.get('site_id'), 'site_id', 96),
+                           'month': normalize_text(record.get('month'), 'month', 20),
+                           'reason': report['reason']})
+    return result
+
+
+def exposure_summary(records: Sequence[Mapping[str, Any]], month_lengths: Mapping[str, int]) -> dict:
+    """Aggregate exposure for a site, separating paused and unknown months."""
+    total_days = 0.0
+    open_months = paused_months = unknown_months = 0
+    for record in records:
+        month = normalize_text(record.get('month'), 'month', 20)
+        report = exposure_days(record, month_lengths.get(month))
+        if report['status'] == 'unknown':
+            unknown_months += 1
+            continue
+        total_days += report['days']
+        if report['paused']:
+            paused_months += 1
+        elif report['days'] > 0:
+            open_months += 1
+    return {'open_days': total_days, 'open_months': open_months,
+            'paused_months': paused_months, 'unknown_months': unknown_months,
+            'month_equivalents': round(total_days / 30.0, 6)}

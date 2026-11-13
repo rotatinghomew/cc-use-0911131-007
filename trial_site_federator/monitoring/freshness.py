@@ -1,5 +1,6 @@
 from __future__ import annotations
-from trial_site_federator.runtime import GenericRuleProcessor, ProcessingContext
+from typing import Any, Mapping
+from trial_site_federator.runtime import GenericRuleProcessor, ProcessingContext, normalize_text
 
 STAGE = 'freshness_monitor'
 RULES = [
@@ -368,3 +369,72 @@ class FreshnessProcessor(GenericRuleProcessor):
 
 def build_processor() -> GenericRuleProcessor:
     return FreshnessProcessor()
+
+
+# --- Observation freshness -----------------------------------------------------------
+#
+# A month can only be used for training once (a) the record was known by the
+# analysis cut-off, (b) the month itself has closed before the cut-off, and
+# (c) the feed reports it complete.  The current, unfinished month is never a
+# training label: its running total is right-censored and would bias every later
+# estimate downward.  A zero-exposure month is a different case: it is real data
+# about a pause, but it cannot estimate a per-open-day rate, so it is excluded
+# from rate fitting while remaining usable as an observed pause.
+
+def month_key(value: object) -> str:
+    return normalize_text(value, 'month', 20)
+
+
+def freshness_of(record: Mapping[str, Any], as_of: str) -> dict:
+    month = month_key(record.get('month'))
+    known_at = normalize_text(record.get('known_at'), 'known_at', 40)
+    as_of_text = normalize_text(as_of, 'as_of', 40)
+    open_days = record.get('open_days')
+    try:
+        open_days_value = float(open_days)
+    except (TypeError, ValueError):
+        open_days_value = None
+    if not month:
+        status, reason = 'stale', 'missing-month'
+    elif month > as_of_text[:7]:
+        status, reason = 'future', 'month-after-cutoff'
+    elif month == as_of_text[:7]:
+        # The current month is right-censored whether or not a running total was
+        # already reported; that is why this check precedes the cut-off check.
+        status, reason = 'open', 'current-month-incomplete'
+    elif not known_at:
+        status, reason = 'stale', 'missing-known-at'
+    elif known_at > as_of_text:
+        status, reason = 'stale', 'reported-after-cutoff'
+    elif open_days_value is None:
+        status, reason = 'stale', 'missing-open-days'
+    else:
+        status, reason = 'usable', 'closed-and-known'
+    return {
+        'status': status,
+        'reason': reason,
+        'month': month,
+        'known_at': known_at or None,
+        'open_days': open_days_value,
+        'training_eligible': status == 'usable',
+        'censored': status == 'open',
+    }
+
+
+def usable_for_training(record: Mapping[str, Any], as_of: str) -> bool:
+    """True only for a closed, known, complete month with a reported exposure."""
+    report = freshness_of(record, as_of)
+    if not report['training_eligible']:
+        return False
+    if record.get('complete') is not True:
+        return False
+    if report['open_days'] is None or report['open_days'] <= 0:
+        return False
+    return True
+
+
+def exposure_known(record: Mapping[str, Any]) -> bool:
+    try:
+        return float(record.get('open_days')) > 0
+    except (TypeError, ValueError):
+        return False
